@@ -1,12 +1,16 @@
 package com.example.sechung.post.entity;
 
 import com.example.sechung.global.entity.BaseEntity;
+import com.example.sechung.global.error.errorcode.ErrorCode;
+import com.example.sechung.global.error.exception.ServiceException;
 import com.example.sechung.post.entity.type.BoardType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
@@ -31,6 +35,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "posts")
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@Getter
 public class PostEntityImpl extends BaseEntity implements PostEntity {
 
   /**
@@ -65,4 +70,18 @@ public class PostEntityImpl extends BaseEntity implements PostEntity {
    * 게시글의 타입.
    */
   private BoardType type;
+
+  @Builder
+  public PostEntityImpl(String title, String content, BoardType type) {
+    this.title = title;
+    this.content = content;
+    this.type = type;
+    validateBuilder();
+  }
+
+  private void validateBuilder() {
+    if (this.title == null || this.content == null || this.type == null) {
+      throw new ServiceException(ErrorCode.INVALID_POST_ENTITY_VALUE);
+    }
+  }
 }

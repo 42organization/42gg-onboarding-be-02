@@ -1,6 +1,9 @@
 package com.example.sechung.post.entity;
 
+import com.example.sechung.global.error.errorcode.ErrorCode;
+import com.example.sechung.global.error.exception.ServiceLoggingException;
 import java.lang.reflect.InvocationTargetException;
+import org.springframework.stereotype.Component;
 
 /**
  * PostEntityFactory.
@@ -25,6 +28,7 @@ import java.lang.reflect.InvocationTargetException;
  * @see :
  * @since : 2023/10/22
  */
+@Component
 public class PostEntityFactory<T extends PostEntity> {
 
   public T getNewInstance(Class<T> clazz) {
@@ -32,7 +36,7 @@ public class PostEntityFactory<T extends PostEntity> {
       return clazz.getDeclaredConstructor().newInstance();
     } catch (NoSuchMethodException | InvocationTargetException |
              InstantiationException | IllegalAccessException e) {
-      throw new RuntimeException(e);
+      throw new ServiceLoggingException(ErrorCode.FACTORY_FAILED);
     }
   }
 }
