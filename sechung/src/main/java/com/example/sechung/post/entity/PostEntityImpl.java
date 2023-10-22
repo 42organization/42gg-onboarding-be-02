@@ -71,6 +71,18 @@ public class PostEntityImpl extends BaseEntity implements PostEntity {
    */
   private BoardType type;
 
+
+  /**
+   * <p>
+   *  PostEntityImpl 의 빌더.
+   * </p>
+   *
+   * @param title
+   * @param content
+   * @param type
+   * @return PostEntityImpl
+   * @throws
+   */
   @Builder
   public PostEntityImpl(String title, String content, BoardType type) {
     this.title = title;
@@ -79,6 +91,16 @@ public class PostEntityImpl extends BaseEntity implements PostEntity {
     validateBuilder();
   }
 
+
+  /**
+   * <p>
+   *  PostEntityImpl 의 빌더를 검증
+   * </p>
+   *
+   * @param
+   * @return void
+   * @throws ServiceException
+   */
   private void validateBuilder() {
     if (this.title == null || this.content == null || this.type == null) {
       throw new ServiceException(ErrorCode.INVALID_POST_ENTITY_VALUE);
