@@ -2,13 +2,14 @@ package com.example.sechung.global.error.exception;
 
 import com.example.sechung.global.error.errorcode.ErrorCode;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
 /**
- * ServiceException.
+ * ServiceLoggingException.
  *
  * <p>
- *  로그를 남길 필요가 없는 서비스에서 발생하는 예외
+ *  로그를 남겨야 하는 서비스에서 발생하는 예외
  * </p>
  *
  * @author : middlefitting
@@ -16,7 +17,8 @@ import org.springframework.http.HttpStatus;
  * @since : 2023/10/22
  */
 @Getter
-public class ServiceException extends RuntimeException {
+@Slf4j
+public class ServiceLoggingException extends RuntimeException {
 
   /**
    * msg : 클라이언트에게 보여줄 에러 메시지
@@ -46,9 +48,10 @@ public class ServiceException extends RuntimeException {
    * @throws
    */
 
-  public ServiceException(ErrorCode errorCode) {
+  public ServiceLoggingException(ErrorCode errorCode) {
     this.msg = errorCode.getClientMessage();
     this.code = errorCode.getErrorCode();
     this.status = errorCode.getHttpStatus();
+    log.error("Error occurred: {} - {}", errorCode.getErrorCode(), errorCode.getDetail());
   }
 }
