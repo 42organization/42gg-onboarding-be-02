@@ -1,6 +1,7 @@
 package com.example.sechung.post.entity;
 
 import com.example.sechung.global.entity.BaseEntity;
+import com.example.sechung.post.entity.type.BoardType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -57,4 +58,11 @@ public class PostEntityImpl extends BaseEntity implements PostEntity {
    * 게시글의 내용.
    */
   private String content;
+
+  /**
+   * type.
+   * <br>
+   * 게시글의 타입.
+   */
+  private BoardType type;
 }
