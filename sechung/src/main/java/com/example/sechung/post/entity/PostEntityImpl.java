@@ -4,6 +4,7 @@ import com.example.sechung.global.entity.BaseEntity;
 import com.example.sechung.global.error.errorcode.ErrorCode;
 import com.example.sechung.global.error.exception.ServiceException;
 import com.example.sechung.post.entity.type.BoardType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -62,6 +63,7 @@ public class PostEntityImpl extends BaseEntity implements PostEntity {
    * <br>
    * 게시글의 내용.
    */
+  @Column(columnDefinition = "TEXT")
   private String content;
 
   /**
