@@ -5,8 +5,11 @@ import com.example.sechung.global.error.exception.ServiceException;
 import com.example.sechung.post.entity.PostEntityImpl;
 import com.example.sechung.post.repository.PostRepository;
 import com.example.sechung.post.service.dto.PostDto;
+import com.example.sechung.post.service.dto.PostUpdateDto;
+import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * PostServiceImpl.
@@ -32,8 +35,34 @@ public class PostServiceImpl implements PostService {
 
   @Override
   public PostDto getPostById(Long id) {
-    PostEntityImpl postEntity = postRepository.findById(id)
-        .orElseThrow(() -> new ServiceException(ErrorCode.POST_NOT_FOUND));
+    PostEntityImpl postEntity = getOrThrow404(postRepository.findById(id));
     return modelMapper.map(postEntity, PostDto.class);
+  }
+
+  @Override
+  public void createPost(PostUpdateDto dto) {
+    PostEntityImpl postEntity = PostEntityImpl.builder()
+        .title(dto.getTitle())
+        .content(dto.getContent())
+        .type(dto.getType())
+        .build();
+    postRepository.save(postEntity);
+  }
+
+  @Override
+  @Transactional(rollbackFor = Exception.class)
+  public void updatePost(PostUpdateDto dto, Long id) {
+    PostEntityImpl postEntity = getOrThrow404(postRepository.findById(id));
+    postEntity.updatePost(dto.getTitle(), dto.getContent(), dto.getType());
+  }
+
+  @Override
+  public void deletePost(Long id) {
+    PostEntityImpl postEntity = getOrThrow404(postRepository.findById(id));
+    postRepository.delete(postEntity);
+  }
+
+  private PostEntityImpl getOrThrow404(Optional<PostEntityImpl> postEntity) {
+    return postEntity.orElseThrow(() -> new ServiceException(ErrorCode.POST_NOT_FOUND));
   }
 }

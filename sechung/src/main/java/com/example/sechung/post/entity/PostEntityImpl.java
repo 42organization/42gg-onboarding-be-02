@@ -108,4 +108,11 @@ public class PostEntityImpl extends BaseEntity implements PostEntity {
       throw new ServiceException(ErrorCode.INVALID_POST_ENTITY_VALUE);
     }
   }
+
+  public void updatePost(String title, String content, BoardType type) {
+    this.title = title;
+    this.content = content;
+    this.type = type;
+    validateBuilder();
+  }
 }

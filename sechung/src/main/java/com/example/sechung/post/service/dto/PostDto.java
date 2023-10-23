@@ -4,6 +4,7 @@ import com.example.sechung.post.entity.type.BoardType;
 import javax.persistence.Column;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class PostDto {
   private Long id;
   private String title;

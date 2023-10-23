@@ -1,4 +1,4 @@
-package com.example.sechung.post.controller.dto;
+package com.example.sechung.post.service.dto;
 
 import com.example.sechung.post.entity.type.BoardType;
 import lombok.AccessLevel;
@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * ResponsePostDto.
+ * PostUpdateDto.
  *
  * <p>
  *
@@ -17,12 +17,11 @@ import lombok.NoArgsConstructor;
  * @see :
  * @since : 2023/10/23
  */
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class ResponsePostDto {
-    private Long id;
-    private String title;
-    private String content;
-    private BoardType type;
+public class PostUpdateDto {
+  private String title;
+  private String content;
+  private BoardType type;
 }

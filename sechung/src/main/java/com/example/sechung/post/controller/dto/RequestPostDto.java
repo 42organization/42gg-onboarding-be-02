@@ -1,13 +1,16 @@
 package com.example.sechung.post.controller.dto;
 
 import com.example.sechung.post.entity.type.BoardType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * ResponsePostDto.
+ * RequestPostDto.
  *
  * <p>
  *
@@ -17,12 +20,14 @@ import lombok.NoArgsConstructor;
  * @see :
  * @since : 2023/10/23
  */
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class ResponsePostDto {
-    private Long id;
-    private String title;
-    private String content;
-    private BoardType type;
+public class RequestPostDto {
+  @NotEmpty
+  private String title;
+  @NotEmpty
+  private String content;
+  @NotNull
+  private BoardType type;
 }
