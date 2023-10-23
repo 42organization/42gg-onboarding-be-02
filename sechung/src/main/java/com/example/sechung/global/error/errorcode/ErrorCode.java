@@ -18,7 +18,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
   FACTORY_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, 101, "팩토리 생성 실패", "내부 서버 오류가 발생하였습니다."),
-  INVALID_POST_ENTITY_VALUE(HttpStatus.BAD_REQUEST , 102, "Post 엔티티 인자값이 잘못됨", "입력 값이 잘못되었습니다!");
+  INVALID_POST_ENTITY_VALUE(HttpStatus.BAD_REQUEST , 102, "Post 엔티티 인자값이 잘못됨", "입력 값이 잘못되었습니다!"),
+
+  POST_NOT_FOUND(HttpStatus.NOT_FOUND , 103, "존재하지 않는 Post", "존재하지 않는 게시글입니다!");
 
   /**
    * httpStatus : HTTP 상태 코드

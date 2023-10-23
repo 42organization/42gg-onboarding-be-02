@@ -1,9 +1,7 @@
 package com.example.sechung.post.repository;
 
-import com.example.sechung.post.entity.PostEntity;
 import com.example.sechung.post.entity.PostEntityImpl;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * PostRepository.
@@ -16,7 +14,6 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @see :
  * @since : 2023/10/23
  */
-@NoRepositoryBean
-public interface PostRepository<ENTITY extends PostEntity> extends JpaRepository<ENTITY, Long> {
+public interface PostRepository extends JpaRepository<PostEntityImpl, Long> {
 
 }
