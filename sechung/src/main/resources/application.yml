@@ -1,0 +1,27 @@
+server:
+  port: 1111
+spring:
+  datasource:
+    url: jdbc:h2:mem:onboard2
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  profiles:
+    include: env
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: false
+    generate-ddl: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: none #for h2
+#      ddl-auto: validate #for mariadb
+      type: trace
+logging:
+  level:
+    p6spy: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql: WARN
