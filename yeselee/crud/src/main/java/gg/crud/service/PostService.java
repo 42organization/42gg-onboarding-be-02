@@ -41,4 +41,11 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
+    // 글 삭제
+    public String deletePost(Long id) {
+        postRepository.deleteById(id);
+
+        return "post deleted";
+    }
+
 }

@@ -31,4 +31,10 @@ public class PostController {
     public PostResponseDto getOnePost(@PathVariable Long id) {
         return postService.findOnePost(id);
     }
+
+    // 글 삭제
+    @DeleteMapping("/posts/{id}")
+    public String deletePost(@PathVariable Long id) {
+        return postService.deletePost(id);
+    }
 }
