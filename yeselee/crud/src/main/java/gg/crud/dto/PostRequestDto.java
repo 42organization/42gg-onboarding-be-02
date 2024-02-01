@@ -1,6 +1,5 @@
 package gg.crud.dto;
 
-import gg.crud.entity.Post;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
