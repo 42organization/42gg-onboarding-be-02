@@ -1,6 +1,7 @@
 package gg.crud.service;
 
-import gg.crud.dto.PostDto;
+import gg.crud.dto.PostRequestDto;
+import gg.crud.dto.PostResponseDto;
 import gg.crud.entity.Post;
 import gg.crud.repository.PostRepository;
 import lombok.AllArgsConstructor;
@@ -15,22 +16,29 @@ public class PostService {
     private final PostRepository postRepository;
 
     // 글 등록
-    public String createPost(PostDto postDto) {
-        Post post = new Post(postDto);
+    public String createPost(PostRequestDto postRequestDto) {
+        Post post = new Post(postRequestDto);
         postRepository.save(post);
         return "new post created";
     }
 
     // 글 전체 조회
-    public List<PostDto> findAllPosts() {
+    public List<PostResponseDto> findAllPosts() {
         List<Post> postList = postRepository.findAll();
-        List<PostDto> postDtoList = new ArrayList<>();
+        List<PostResponseDto> postDtoList = new ArrayList<>();
 
         for (Post post : postList) {
-            postDtoList.add(new PostDto(post));
+            postDtoList.add(new PostResponseDto(post));
         }
 
         return postDtoList;
+    }
+
+    // 특정 글 조회
+    public PostResponseDto findOnePost(Long id) {
+        Post post = postRepository.findById(id).get();
+
+        return new PostResponseDto(post);
     }
 
 }

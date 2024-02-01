@@ -6,14 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class PostDto {
+public class PostRequestDto {
     private String title;
     private String body;
     private String author;
-
-    public PostDto(Post post) {
-        this.title = post.getTitle();
-        this.body = post.getBody();
-        this.author = post.getAuthor();
-    }
 }

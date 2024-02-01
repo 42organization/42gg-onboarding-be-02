@@ -1,6 +1,6 @@
 package gg.crud.entity;
 
-import gg.crud.dto.PostDto;
+import gg.crud.dto.PostRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class Post {
     private String author;
 
     //dto 생성자
-    public Post(PostDto postDto) {
+    public Post(PostRequestDto postDto) {
         this.title = postDto.getTitle();
         this.body = postDto.getBody();
         this.author = postDto.getAuthor();
