@@ -9,12 +9,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name="posts")
+@Table(name="post")
 @NoArgsConstructor
 public class Post {
     // 글 id, title, body, author
     @Id // 기본키 지정
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
