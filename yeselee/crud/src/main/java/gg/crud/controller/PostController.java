@@ -37,4 +37,10 @@ public class PostController {
     public String deletePost(@PathVariable Long id) {
         return postService.deletePost(id);
     }
+
+    // 글 수정
+    @PutMapping("/posts/{id}")
+    public Long updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto) {
+        return postService.updatePost(id, postRequestDto);
+    }
 }

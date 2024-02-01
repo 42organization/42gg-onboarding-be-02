@@ -48,4 +48,12 @@ public class PostService {
         return "post deleted";
     }
 
+    // 글 수정
+    public Long updatePost(Long id, PostRequestDto postRequestDto) {
+        Post post = postRepository.findById(id).get();
+        post.update(postRequestDto);
+
+        return id;
+    }
+
 }

@@ -25,9 +25,15 @@ public class Post {
     private String author;
 
     //dto 생성자
-    public Post(PostRequestDto postDto) {
-        this.title = postDto.getTitle();
-        this.body = postDto.getBody();
-        this.author = postDto.getAuthor();
+    public Post(PostRequestDto postRequestDto) {
+        this.title = postRequestDto.getTitle();
+        this.body = postRequestDto.getBody();
+        this.author = postRequestDto.getAuthor();
+    }
+
+    public void update(PostRequestDto postRequestDto) {
+        this.title = postRequestDto.getTitle();
+        this.body = postRequestDto.getBody();
+        this.author = postRequestDto.getAuthor();
     }
 }
