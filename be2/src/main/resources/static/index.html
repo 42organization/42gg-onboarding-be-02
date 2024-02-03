@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Data Display</title>
+</head>
+<body>
+<h1>DB에 Post 보내기</h1>
+<form id="postForm">
+    <input type="text" id="title" placeholder="Enter title" required>
+    <input type="text" id="text" placeholder="Enter text" required>
+    <input type="submit" value="Post">
+</form>
+
+<h2>DB 전체 목록</h2>
+<ul id="postsList"></ul>
+
+<script>
+    document.getElementById('postForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const titleValue = document.getElementById('title').value;
+        const textValue = document.getElementById('text').value;
+        const postData = { title: titleValue, text: textValue };
+
+        fetch('/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
+            .then(response => response.json())
+            .then(post => {
+                alert('Post 제출 성공');
+                fetchPosts();
+            })
+            .catch(error => {
+                alert('Post 제출 실패');
+                console.error('Error:', error);
+            });
+    });
+
+    function fetchPosts() {
+        fetch('/posts')
+            .then(response => response.json())
+            .then(postIds => {
+                const postsList = document.getElementById('postsList');
+                postsList.innerHTML = '';
+
+                postIds.forEach(postId => {
+                    fetch(`/posts/${postId}`)
+                        .then(response => response.json())
+                        .then(post => {
+                            const li = document.createElement('li');
+                            li.textContent = postId + ': ' + post.title + ' - ' + post.text;
+
+                            const deleteButton = document.createElement('button');
+                            deleteButton.textContent = 'Delete';
+                            deleteButton.addEventListener('click', function() {
+                                fetch(`/posts/${postId}`, { method: 'DELETE' })
+                                    .then(() => {
+                                        alert('Delete 제출 성공');
+                                        fetchPosts();
+                                    })
+                                    .catch(error => {
+                                        alert('Delete 제출 실패');
+                                        console.error('Error:', error);
+                                    });
+                            });
+                            li.appendChild(deleteButton);
+
+                            const updateButton = document.createElement('button');
+                            updateButton.textContent = 'Update';
+                            updateButton.addEventListener('click', function() {
+                                const newTitle = prompt('Update title', post.title);
+                                const newText = prompt('Update text', post.text);
+                                if (newTitle && newText) {
+                                    const updatedPost = { title: newTitle, text: newText };
+                                    fetch(`/posts/${postId}`, {
+                                        method: 'PUT',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify(updatedPost)
+                                    })
+                                        .then(() => {
+                                            alert('Update 제출 성공');
+                                            fetchPosts();
+                                        })
+                                        .catch(error => {
+                                            alert('Update 제출 실패');
+                                            console.error('Error:', error);
+                                        });
+                                }
+                            });
+                            li.appendChild(updateButton);
+
+                            postsList.appendChild(li);
+                        });
+                });
+            })
+            .catch(error => console.error('Error fetching posts:', error));
+    }
+
+    fetchPosts();
+</script>
+</body>
+</html>
