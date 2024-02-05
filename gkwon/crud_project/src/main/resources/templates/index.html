@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Data Display</title>
+</head>
+<body>
+<h1>DB에 Post 보내기</h1>
+<form th:action="@{/posts/createform}" method="post">
+    <a href="/posts/createform">게시물 등록</a>
+</form>
+
+<h2>DB 전체 목록</h2>
+<ul>
+    <li th:each="post : ${posts}">
+        <span th:text="${post.id}"></span>: <span th:text="${post.title}"></span>
+        <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
+            <input type="submit" value="Delete">
+        </form>
+        <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
+            <input type="submit" value="Edit">
+        </form>
+    </li>
+</ul>
+
+<script>
+    // JavaScript 코드는 생략 (기존과 동일하게 사용 가능)
+</script>
+</body>
+</html>
