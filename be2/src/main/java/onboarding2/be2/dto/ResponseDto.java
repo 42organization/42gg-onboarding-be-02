@@ -12,10 +12,4 @@ public class ResponseDto {
     private long id;
     private String title;
     private String text;
-
-    public ResponseDto(Long id, String title,String text) {
-        this.id = id;
-        this.title = title;
-        this.text = text;
-    }
 }

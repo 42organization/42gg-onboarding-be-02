@@ -11,3 +11,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        #디버깅용 sql문 보기
+#  sql:
+#    init:
+#     mode:
+# 이런식으로 시작때 sql문 실행 가능
