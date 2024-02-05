@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/디비이름?useSSL=false&serverTimezone=UTC
+    username: 아이디
+    password: 비밀번호
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        #디버깅용 sql문 보기
+#  sql:
+#    init:
+#     mode:
+# 이런식으로 시작때 sql문 실행 가능
