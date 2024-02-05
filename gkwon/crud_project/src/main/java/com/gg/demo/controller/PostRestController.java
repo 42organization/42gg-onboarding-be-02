@@ -104,13 +104,13 @@ public class PostRestController {
     }
 
     // Update post by ID
-    @PutMapping("/{postId}/edit")
+    @PutMapping("/{postId}")
     public void updatePost(@PathVariable("postId") Long postId, @RequestBody PostDTO.createPostDto updatedPost) {
         postService.updatePost(postId, updatedPost);
     }
 
     // Delete post by ID
-    @DeleteMapping("/{postId}/delete")
+    @DeleteMapping("/{postId}")
     public void deletePost(@PathVariable("postId") Long postId) {
         postService.deletePost(postId);
     }
